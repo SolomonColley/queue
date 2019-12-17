@@ -83,17 +83,34 @@ void Queue<ItemType>::dequeue()
 template<class ItemType>
 ItemType Queue<ItemType>::peek()
 {
-	return ItemType();
-}
+	try
+	{
+		if (isEmpty() == false)
+			return items[rear];
+		else
+			throw EmptyQueueException(std::string("peek()"
+				+ " called, but the queue is empty."); // end if-else
+	}
+	catch (const EmptyQueueException & ex)
+	{
+		std::cout << ex.what() << std::endl;
+	} // end try-catch
+} // end peek
 
 template<class ItemType>
 bool Queue<ItemType>::isFull() noexcept
 {
-	return false;
-}
+	if (rear == SIZE)
+		return true;
+	else
+		return false; // end if-else
+} // end isFull
 
 template<class ItemType>
 bool Queue<ItemType>::isEmpty() noexcept
 {
-	return false;
-}
+	if (rear < 0)
+		return true;
+	else
+		return false; // end if-else
+} // end isEmpty
