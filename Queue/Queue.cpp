@@ -13,12 +13,12 @@
 
 template<class ItemType>
 Queue<ItemType>::Queue(const int size)
-	: SIZE(size), front(0), rear(0), items(nullptr)
+	: MAXSIZE(size), front(0), rear(-1), itemCount(0), items(nullptr)
 {
 	try
 	{
-		if (size >= 1)
-			items = new ItemType[SIZE];
+		if (size >= 0)
+			items = new ItemType[MAXSIZE];
 		else
 			throw NegativeSizeException(std::string("Queue(const int size)")
 				+ " called with a size ("
@@ -45,13 +45,17 @@ void Queue<ItemType>::enqueue(const ItemType& item)
 	{
 		if (isFull() == false)
 		{
+			if (rear == MAXSIZE - 1)
+				rear = -1; // end if-else
+
 			rear++;
 			items[rear] = item;
+			itemCount++;
 		}
 		else
 			throw FullQueueException(std::string("enqueue(const ItemType& item)")
 				+ " called, but the queue is full at "
-				+ std::to_string(SIZE)
+				+ std::to_string(MAXSIZE)
 				+ " data items."); // end if-else
 	}
 	catch (const FullQueueException & ex)
@@ -67,8 +71,13 @@ void Queue<ItemType>::dequeue()
 	{
 		if (isEmpty() == false)
 		{
-			items[rear] = NULL;
-			rear--;
+			items[front] = NULL;
+			front++;
+
+			if (front == MAXSIZE)
+				front = 0; // end if-else
+
+			itemCount--;
 		}
 		else
 			throw EmptyQueueException(std::string("dequeue()")
@@ -86,9 +95,9 @@ ItemType Queue<ItemType>::peek()
 	try
 	{
 		if (isEmpty() == false)
-			return items[rear];
+			return items[front];
 		else
-			throw EmptyQueueException(std::string("peek()"
+			throw EmptyQueueException(std::string("peek()")
 				+ " called, but the queue is empty."); // end if-else
 	}
 	catch (const EmptyQueueException & ex)
@@ -100,7 +109,7 @@ ItemType Queue<ItemType>::peek()
 template<class ItemType>
 bool Queue<ItemType>::isFull() noexcept
 {
-	if (rear == SIZE)
+	if (itemCount == MAXSIZE)
 		return true;
 	else
 		return false; // end if-else
@@ -109,7 +118,7 @@ bool Queue<ItemType>::isFull() noexcept
 template<class ItemType>
 bool Queue<ItemType>::isEmpty() noexcept
 {
-	if (rear < 0)
+	if (itemCount == 0)
 		return true;
 	else
 		return false; // end if-else

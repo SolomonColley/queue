@@ -22,8 +22,8 @@ template<class ItemType>
 class Queue : public QueueInterface<ItemType>
 {
 private:
-	const int SIZE;
-	int front, rear;
+	const int MAXSIZE;
+	int front, rear, itemCount;
 	ItemType* items;
 public:
 	/// <summary>
