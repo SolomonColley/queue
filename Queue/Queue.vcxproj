@@ -140,11 +140,14 @@
   <ItemGroup>
     <ClInclude Include="EmptyQueueException.h" />
     <ClInclude Include="FullQueueException.h" />
+    <ClInclude Include="NegativeSizeException.h" />
+    <ClInclude Include="Queue.h" />
     <ClInclude Include="QueueInterface.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EmptyQueueException.cpp" />
     <ClCompile Include="FullQueueException.cpp" />
+    <ClCompile Include="NegativeSizeException.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

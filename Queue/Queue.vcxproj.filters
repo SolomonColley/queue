@@ -24,12 +24,21 @@
     <ClInclude Include="FullQueueException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Queue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NegativeSizeException.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EmptyQueueException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FullQueueException.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NegativeSizeException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
