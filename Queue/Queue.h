@@ -22,7 +22,7 @@ template<class ItemType>
 class Queue : public QueueInterface<ItemType>
 {
 private:
-	const int MAXSIZE;
+	const int MAX_SIZE;
 	int front, rear, itemCount;
 	ItemType* items;
 public:
@@ -59,6 +59,18 @@ public:
 	/// <returns>the data item at the front of the queue</returns>
 	/// <exception cref="EmptyQueueException">thrown if the queue is empty</exception>
 	ItemType peek();
+
+	/// <summary>
+	/// Gets the current number of data items in the stack.
+	/// </summary>
+	/// <returns>the number of data items in the stack</returns>
+	int size() const noexcept;
+
+	/// <summary>
+	/// Gets the maximum number of data items the stack can hold.
+	/// </summary>
+	/// <returns>the maximum number of data items the stack can hold</returns>
+	int maxSize() const noexcept;
 
 	/// <summary>
 	/// Determines whether the queue is full or not.

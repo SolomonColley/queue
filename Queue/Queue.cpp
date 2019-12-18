@@ -13,12 +13,12 @@
 
 template<class ItemType>
 Queue<ItemType>::Queue(const int size)
-	: MAXSIZE(size), front(0), rear(-1), itemCount(0), items(nullptr)
+	: MAX_SIZE(size), front(0), rear(-1), itemCount(0), items(nullptr)
 {
 	try
 	{
 		if (size >= 0)
-			items = new ItemType[MAXSIZE];
+			items = new ItemType[MAX_SIZE];
 		else
 			throw NegativeSizeException(std::string("Queue(const int size)")
 				+ " called with a size ("
@@ -45,7 +45,7 @@ void Queue<ItemType>::enqueue(const ItemType& item)
 	{
 		if (isFull() == false)
 		{
-			if (rear == MAXSIZE - 1)
+			if (rear == MAX_SIZE - 1)
 				rear = -1; // end if-else
 
 			rear++;
@@ -55,7 +55,7 @@ void Queue<ItemType>::enqueue(const ItemType& item)
 		else
 			throw FullQueueException(std::string("enqueue(const ItemType& item)")
 				+ " called, but the queue is full at "
-				+ std::to_string(MAXSIZE)
+				+ std::to_string(MAX_SIZE)
 				+ " data items."); // end if-else
 	}
 	catch (const FullQueueException & ex)
@@ -74,7 +74,7 @@ void Queue<ItemType>::dequeue()
 			items[front] = NULL;
 			front++;
 
-			if (front == MAXSIZE)
+			if (front == MAX_SIZE)
 				front = 0; // end if-else
 
 			itemCount--;
@@ -107,9 +107,21 @@ ItemType Queue<ItemType>::peek()
 } // end peek
 
 template<class ItemType>
+int Queue<ItemType>::size() const noexcept
+{
+	return itemCount;
+} // end size
+
+template<class ItemType>
+int Queue<ItemType>::maxSize() const noexcept
+{
+	return MAX_SIZE;
+} // end maxSize
+
+template<class ItemType>
 bool Queue<ItemType>::isFull() noexcept
 {
-	if (itemCount == MAXSIZE)
+	if (itemCount == MAX_SIZE)
 		return true;
 	else
 		return false; // end if-else
