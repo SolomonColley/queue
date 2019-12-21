@@ -60,6 +60,12 @@ int main()
 	cout << "peeking the front of the queue... should be 4: ";
 	cout << to_string(numbers->peek()) << "\n";
 
+	cout << "\ngetting the maximum size of the queue... should be 5: ";
+	cout << to_string(numbers->maxSize()) << "\n";
+
+	cout << "getting the actual size of the queue... should be 2: ";
+	cout << to_string(numbers->size()) << "\n";
+
 	cout << "\ndeleting the queue and freeing allocated memory...\n";
 
 	// free up allocated memory and exit successfully
